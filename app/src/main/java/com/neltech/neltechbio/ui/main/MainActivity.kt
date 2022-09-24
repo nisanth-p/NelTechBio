@@ -33,7 +33,7 @@ class MainActivity : ComponentActivity() {
         Log.d(TAG, "onCreate: ")
         setContent {
             // val viewModel = hiltViewModel <RootViewModel> ()
-/*   CompositionLocalProvider(LocalCoilImageLoader provides viewModel.imageLoader) {*/
+   CompositionLocalProvider(LocalCoilImageLoader provides viewModel.imageLoader) {
 
                 NelTechBioTheme() {
                    // WindowCompat.setDecorFitsSystemWindows(window, false)
@@ -48,7 +48,7 @@ class MainActivity : ComponentActivity() {
 
                     }
                 }
-       //    }
+           }
 
         }
     }
