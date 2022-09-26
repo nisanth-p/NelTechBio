@@ -1,6 +1,7 @@
 package com.neltech.neltechbio.di
 
 import com.neltech.neltechbio.network.DisneyService
+import com.neltech.neltechbio.ui.main.MainRepo
 import com.neltech.neltechbio.ui.main.MainRepository
 import dagger.Module
 import dagger.Provides
@@ -15,7 +16,13 @@ object RepositoryModule {
 
     @Provides
     @ViewModelScoped
-    fun provideMainRepository( ): MainRepository {
+    fun provideMainRepository(): MainRepository {
         return MainRepository()
+    }
+
+    @Provides
+    @ViewModelScoped
+    fun provideMainRepo( dis:DisneyService): MainRepo {
+        return MainRepo(dis)
     }
 }
