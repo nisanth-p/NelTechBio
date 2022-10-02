@@ -30,3 +30,5 @@ data class Poster(
         )
     }
 }
+
+data class Failed(val code:Int,val message:String)

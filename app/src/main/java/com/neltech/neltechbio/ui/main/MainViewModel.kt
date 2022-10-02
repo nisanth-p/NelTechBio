@@ -1,5 +1,6 @@
 package com.neltech.neltechbio.ui.main
 
+import android.util.Log
 import androidx.annotation.StringRes
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
@@ -13,7 +14,20 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(var main:MainRepository) : ViewModel() {
-    lateinit var  posterList: Flow<List<Poster>>
+    private  val TAG = "MainViewModel"
+     var  posterList: Flow<List<Poster>> = main.loadDisneyPosters(
+         onStart =  {//onStart
+             Log.d(TAG, ": onStart")
+         },
+         onCompletion =   {
+             //onComplete
+             Log.d(TAG, ": onCompletion")
+         },
+         onError =   {
+             //onError
+             Log.d(TAG, ": onError")
+         }
+     ) as Flow<List<Poster>>
 
     private val _isLoading: MutableState<Boolean> = mutableStateOf(false)
     val isLoading: State<Boolean> get() = _isLoading
@@ -25,19 +39,4 @@ class MainViewModel @Inject constructor(var main:MainRepository) : ViewModel() {
     }
 
 
-    fun getPosterDetails():Flow<List<Poster>>{
-        posterList= main.loadDisneyPosters(
-            {//onStart
-
-            },
-            {
-                //onComplete
-
-            },
-            {
-                //onError
-            }
-        ) as Flow<List<Poster>>
-  return posterList
-    }
 }

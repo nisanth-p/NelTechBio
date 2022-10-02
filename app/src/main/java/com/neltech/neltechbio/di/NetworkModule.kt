@@ -16,6 +16,10 @@ import okhttp3.Cache
 import okhttp3.OkHttpClient
 import javax.inject.Singleton
 import coil.util.CoilUtils
+import com.neltech.neltechbio.network.DisneyService
+import com.skydoves.sandwich.coroutines.CoroutinesResponseCallAdapterFactory
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 
 @Module
@@ -53,6 +57,23 @@ object NetworkModule {
                 }
             ).build()
     }
+    @Provides
+    @Singleton
+    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
+        return Retrofit.Builder()
+            .client(okHttpClient)
+            .baseUrl(
+                "https://gist.githubusercontent.com/skydoves/176c209dbce4a53c0ff9589e07255f30/raw/6489d9712702e093c4df71500fb822f0d408ef75/"
+            )
+            .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(CoroutinesResponseCallAdapterFactory.create())
+            .build()
+    }
 
+    @Provides
+    @Singleton
+    fun provideDisneyService(retrofit: Retrofit): DisneyService {
+        return retrofit.create(DisneyService::class.java)
+    }
 
 }
