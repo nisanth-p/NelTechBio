@@ -18,19 +18,23 @@ class MainViewModel @Inject constructor(var main:MainRepository) : ViewModel() {
      var  posterList: Flow<List<Poster>> = main.loadDisneyPosters(
          onStart =  {//onStart
              Log.d(TAG, ": onStart")
+             _isLoading.value =true
          },
          onCompletion =   {
              //onComplete
              Log.d(TAG, ": onCompletion")
+             _isLoading.value =false
          },
          onError =   {
              //onError
              Log.d(TAG, ": onError")
+             _isLoading.value =false
          }
      ) as Flow<List<Poster>>
 
     private val _isLoading: MutableState<Boolean> = mutableStateOf(false)
     val isLoading: State<Boolean> get() = _isLoading
+
     private val _selectedTab: MutableState<Int> = mutableStateOf(0)
     val selectedTab: State<Int> get() = _selectedTab
 
