@@ -2,7 +2,9 @@ package com.neltech.neltechbio.ui.posters
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -12,29 +14,37 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.google.accompanist.insets.statusBarsPadding
 import com.neltech.neltechbio.R
+import com.neltech.neltechbio.ui.model.Poster
+import com.neltech.neltechbio.util.NetworkImage
 
 @OptIn(ExperimentalLayoutApi::class, ExperimentalMaterial3Api::class)
 @Composable
-fun HomePosters(selectPoster: (Long) -> Unit) {
+fun HomePosters(posters: List<Poster>, selectPoster: (Long) -> Unit, home: DisneyHomeTab) {
     Scaffold(
 
-        modifier = Modifier.fillMaxSize().background(Color( R.color.yellowgreen)),
-        topBar = { topBar1()},
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color(R.color.yellowgreen)),
+        topBar = { topBar1() },
         bottomBar = {},
         contentColor = Color.Red,
         snackbarHost = {},
         content = { innerPadding ->
-            LazyColumn(
-                // consume insets as scaffold doesn't do it by default
-                modifier = Modifier.consumedWindowInsets(innerPadding),
-                contentPadding = innerPadding
+            Column(
+                modifier = Modifier
+                    .statusBarsPadding()
+                    .verticalScroll(rememberScrollState())
+                    .background(MaterialTheme.colors.background)
+                    .padding(innerPadding)
             ) {
+                Text(text = posters[0].name + "")
+                 NetworkImage(posters,home)
             }
         }
     )

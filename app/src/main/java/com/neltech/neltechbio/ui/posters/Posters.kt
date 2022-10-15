@@ -1,6 +1,7 @@
 package com.neltech.neltechbio.ui.posters
 
 
+import android.util.Log
 import androidx.annotation.StringRes
 import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.layout.height
@@ -53,6 +54,8 @@ fun Posters(viewModel: MainViewModel, selectPoster: (Long) -> Unit) {
                 ) {
 
                     allTabsList.forEach { tab ->
+
+                        Log.d("TAG", "Posters: =============="+posters)
                         BottomNavigationItem(
                             label = { Text(stringResource(tab.title), color = Color.White) },
                             selected = tab == selectedTab,
@@ -80,8 +83,8 @@ fun Posters(viewModel: MainViewModel, selectPoster: (Long) -> Unit) {
             val modifier = Modifier.padding(innerPadding)
             Crossfade(targetState = selectedTab) { destination ->
                 when (destination) {
-                    DisneyHomeTab.HOME -> HomePosters(selectPoster)
-                    DisneyHomeTab.RADIO -> RadioPosters()
+                    DisneyHomeTab.HOME -> HomePosters(posters,selectPoster,DisneyHomeTab.HOME)
+                    DisneyHomeTab.RADIO -> RadioPosters(posters,selectPoster,DisneyHomeTab.RADIO)
                     DisneyHomeTab.LIBRARY -> LibraryPosters()
                 }
             }
