@@ -38,6 +38,12 @@ fun LibraryPosters(){
     )
 }
 
+
+@Composable
+fun LibraryPoster(){
+
+}
+
 @Composable
 fun topBar2(
 

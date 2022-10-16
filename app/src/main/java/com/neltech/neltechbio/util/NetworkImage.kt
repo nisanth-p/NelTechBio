@@ -1,37 +1,45 @@
 package com.neltech.neltechbio.util
 
-import android.util.Log
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import coil.request.ImageRequest
-import com.neltech.neltechbio.ui.model.Poster
 import com.neltech.neltechbio.ui.posters.DisneyHomeTab
 import com.skydoves.landscapist.ShimmerParams
 import com.skydoves.landscapist.coil.CoilImage
+import com.skydoves.landscapist.palette.BitmapPalette
 
 @Composable
-fun NetworkImage(posters: List<Poster>, type: DisneyHomeTab) {
-    var con = LocalContext.current
-    Log.d("TAG", "NetworkImage: " + posters[1].poster)
-    var modifier: Modifier
-    var url: String
-    if (type == DisneyHomeTab.HOME) {
+fun NetworkImage(
+    type: DisneyHomeTab,
+    @PreviewParameter(NetworkUrlPreviewProvider::class) url: String,
+    modifier: Modifier,
+    bitmapPalette: BitmapPalette? = null,
+    contentScale: ContentScale = ContentScale.Crop,
 
-        modifier = Modifier
-            .width(100.dp)
-            .height(200.dp)
-        url= posters[0].poster
-    }else{
-        modifier = Modifier.fillMaxSize()
-        url=    posters[1].poster
+    ) {
+    var con = LocalContext.current
+
+
+    when (type) {
+        DisneyHomeTab.HOME -> {
+
+        }
+        DisneyHomeTab.LIBRARY -> {
+
+        }
+        DisneyHomeTab.RADIO -> {
+
+        }
     }
+
     CoilImage(
         imageRequest = ImageRequest.Builder(con)
             .data(url)
@@ -40,7 +48,10 @@ fun NetworkImage(posters: List<Poster>, type: DisneyHomeTab) {
             highlightColor = Color(0xA3C2C2C2),
             dropOff = 0.65f
         ),
-        modifier =modifier
+        modifier = modifier
+           , failure = {
+
+        }
     )
 
 

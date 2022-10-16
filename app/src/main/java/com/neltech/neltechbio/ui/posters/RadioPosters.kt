@@ -34,8 +34,8 @@ fun RadioPosters(posters: List<Poster>, selectPoster: (Long) -> Unit, radio: Dis
                     .background(MaterialTheme.colors.background)
                     .padding(innerPadding)
             ) {
-                Text(text = posters[1].name + "")
-                NetworkImage(posters,radio)
+                /*Text(text = posters[1].name + "")
+                NetworkImage(posters,radio)*/
             }
         }
     )
